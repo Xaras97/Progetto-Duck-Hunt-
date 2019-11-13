@@ -20,7 +20,7 @@ public class Muovitidritto : MonoBehaviour
             transform.localPosition += transform.forward * velocita * Time.deltaTime;
 
         }
-        else
+        else 
         {
 
             transform.localRotation = Quaternion.Euler(rOffset);
