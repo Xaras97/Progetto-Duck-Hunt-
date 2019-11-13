@@ -27,12 +27,13 @@ public class Mirino : MonoBehaviour
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
+        
         Vector3 screenPoint = Input.mousePosition + new Vector3(0,0,1);
         Vector3 worldPos = cam.ScreenToWorldPoint(screenPoint);
         this.transform.position = worldPos;
-
+        
        
            if (Input.GetMouseButtonDown(0))
            {
@@ -40,6 +41,7 @@ public class Mirino : MonoBehaviour
                 bullets--;
                 RaycastHit hit;
                 if (Physics.Raycast(cam.transform.position, (worldPos - cam.transform.position).normalized, out hit, maxDistance))
+                //if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, maxDistance))
                 {
 
                     if (hit.collider.gameObject.tag == "duck")

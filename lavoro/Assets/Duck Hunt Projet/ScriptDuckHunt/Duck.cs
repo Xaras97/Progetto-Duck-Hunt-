@@ -22,9 +22,17 @@ public class Duck : MonoBehaviour
     {
         levelManager = FindObjectOfType<LevelManager>();
         anim = GetComponent<Animator>();
+        if ( anim == null)
+        {
+            anim = GetComponentInChildren<Animator>();
+        }
         mirino = FindObjectOfType<Mirino>();
         head = GetComponentInChildren<DuckHead>();
-        head.owner = this;
+        if ( head != null )
+        {
+            head.owner = this;
+        }
+        
     }
     public void Danneggia(int damage)
     {
@@ -36,7 +44,11 @@ public class Duck : MonoBehaviour
            
             anim.SetTrigger("Morta");
             Destroy(this.gameObject.GetComponent<Collider>());
-            Destroy(head.GetComponent<Collider>());
+            if (head != null)
+            {
+                Destroy(head.GetComponent<Collider>());
+
+            }
 
 
             if (tipo == TIPI_DI_PAPERE.RIGHT_DUCK)
