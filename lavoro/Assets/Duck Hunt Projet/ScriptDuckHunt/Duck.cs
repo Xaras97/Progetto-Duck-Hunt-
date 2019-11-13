@@ -10,7 +10,6 @@ public class Duck : MonoBehaviour
     public LevelManager levelManager;
     public Mirino mirino;
     public Animator anim;
-    public GameObject movimento;
 
     public enum TIPI_DI_PAPERE
     {
@@ -29,12 +28,12 @@ public class Duck : MonoBehaviour
     public void Danneggia(int damage)
     {
         vita -= damage;
-        anim.SetTrigger("presa");
+        anim.SetTrigger("Presa");
 
         if (vita <= 0)           
         {
            
-            anim.SetTrigger("morta");
+            anim.SetTrigger("Morta");
             this.gameObject.GetComponent<Collider>().isTrigger=true;
             head.GetComponent<Collider>().isTrigger = true;
 
