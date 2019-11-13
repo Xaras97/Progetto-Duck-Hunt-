@@ -8,19 +8,40 @@ public class RandomSpawn : MonoBehaviour
     public GameObject[] PapereNormali = new GameObject[0];
     public GameObject[] PapereMalus = new GameObject[0];
 
+    public float secondiTraGliSpawn = 5f;
+    [Space(5)]
+    
+
     [Range(-360f, 360f)]
     public float rangeMin = 0,rangeMax = 0;
 
+    [Header("Percentuali di Spawn x=min / y=max")]
+    public bool spawn;
+    [Space(5)]
+    public int percMassima = 100;
+    [Space(10)]
+    public Vector2 PercNormali;
+    public Vector2 PercBonus;
+    public Vector2 PercMalus;
+
     public float distanzaDalloSpawn = 5;
 
-    void SpawnaPapere()
+    private void Start()
+    {
+        AvviaLoSpawn();
+    }
+
+    public void AvviaLoSpawn() 
     {
 
-        int numeroacaso = Random.Range(0, 101);
-        if (numeroacaso > 75)
-        {
+        StartCoroutine("SpawnaPaperaACaso");
 
-        }
+    }
+
+    void FermaSpawnaPapere()
+    {
+
+        StopCoroutine("SpawnaPeraACaso");
 
     }
 
@@ -31,7 +52,7 @@ public class RandomSpawn : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(Random.Range(rangeMin, rangeMax), 0, 0);
 
-        GameObject PaperaBInstance = Instantiate(PaperaB,transform.up * distanzaDalloSpawn, Quaternion.Euler(transform.forward));
+        GameObject PaperaBInstance = Instantiate(PaperaB,transform.position + transform.up * distanzaDalloSpawn, Quaternion.Euler(transform.forward));
 
         Debug.Log(this.transform.rotation.x);
 
@@ -46,9 +67,10 @@ public class RandomSpawn : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(Random.Range(rangeMin, rangeMax), 0, 0);
 
-        GameObject PaperaNInstance = Instantiate(PaperaN, transform.up * distanzaDalloSpawn, Quaternion.Euler(transform.forward));
+        GameObject PaperaNInstance = Instantiate(PaperaN, transform.position + transform.up * distanzaDalloSpawn, Quaternion.Euler(transform.forward));
 
         PaperaNInstance.transform.LookAt(PaperaNInstance.transform.position + transform.up, Vector3.up);
+
     }
 
     void SpawnaPaperaMalus()
@@ -57,7 +79,7 @@ public class RandomSpawn : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(Random.Range(rangeMin, rangeMax), 0, 0);
 
-        GameObject PaperaMInstance = Instantiate(PaperaM, transform.up * distanzaDalloSpawn, Quaternion.Euler(transform.forward));
+        GameObject PaperaMInstance = Instantiate(PaperaM, transform.position + transform.up * distanzaDalloSpawn, Quaternion.Euler(transform.forward));
 
         PaperaMInstance.transform.LookAt(PaperaMInstance.transform.position + transform.up, Vector3.up);
 
@@ -66,11 +88,81 @@ public class RandomSpawn : MonoBehaviour
 
     private void Update()
     {
+
+            
+
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SpawnaPaperaBonus();
+
         }
 
     }
 
+    IEnumerator SpawnaPaperaACaso2()
+    {
+
+        yield return new WaitForSeconds(secondiTraGliSpawn);
+
+        spawn = false;
+
+        int numeroGenerato = Random.Range(0, percMassima);
+
+
+        if (numeroGenerato > PercNormali.x && numeroGenerato < PercNormali.y)
+        {
+
+            SpawnaPaperaNormale();
+
+        }
+        if (numeroGenerato > PercBonus.x && numeroGenerato < PercBonus.y)
+        {
+
+            SpawnaPaperaBonus();
+
+        }
+        if (numeroGenerato > PercMalus.x && numeroGenerato < PercMalus.y)
+        {
+
+            SpawnaPaperaMalus();
+
+        }
+
+        FermaSpawnaPapere();
+    }
+
+
+    IEnumerator SpawnaPaperaACaso()
+    {
+
+        while(spawn)
+        {
+
+            yield return new WaitForSeconds(secondiTraGliSpawn);
+
+            int numeroGenerato = Random.Range(0, percMassima);
+
+
+            if (numeroGenerato > PercNormali.x && numeroGenerato < PercNormali.y)
+            {
+
+                SpawnaPaperaNormale();
+
+            }
+            if (numeroGenerato > PercBonus.x && numeroGenerato < PercBonus.y)
+            {
+
+                SpawnaPaperaBonus();
+
+            }
+            if (numeroGenerato > PercMalus.x && numeroGenerato < PercMalus.y)
+            {
+
+                SpawnaPaperaMalus();
+
+            }
+        }
+    }
 }

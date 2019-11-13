@@ -201,8 +201,14 @@ MonoBehaviour:
   - {fileID: 898985876882260795, guid: 9bf612cf59cc7a444ac4805c6cbd11ad, type: 3}
   PapereNormali: []
   PapereMalus: []
-  rangeMin: -40
-  rangeMax: 40
+  secondiTraGliSpawn: 5
+  percMassima: 100
+  rangeMin: -60
+  rangeMax: 60
+  spawnAtStart: 0
+  PercNormali: {x: 0, y: 0}
+  PercBonus: {x: 0, y: 0}
+  PercMalus: {x: 0, y: 0}
   distanzaDalloSpawn: 5
 --- !u!4 &341476494
 Transform:
