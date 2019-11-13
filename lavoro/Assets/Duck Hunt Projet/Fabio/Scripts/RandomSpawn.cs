@@ -10,8 +10,10 @@ public class RandomSpawn : MonoBehaviour
     [Range(-360f,360f)]
     public float rangeMin = 0,rangeMax = 0;
 
+    float distanzaDalloSpawn = 5;
 
-    public Vector3 direction;
+    public Vector3 direction,rotOffset;
+
     void SpawnaPapere()
     {
 
@@ -30,9 +32,9 @@ public class RandomSpawn : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(Random.Range(rangeMin, rangeMax), 0, 0);
 
-        GameObject PaperaBInstance = Instantiate(PaperaB,transform.up * 5, Quaternion.Euler(transform.forward));
+        GameObject PaperaBInstance = Instantiate(PaperaB,transform.up * distanzaDalloSpawn, Quaternion.Euler(transform.forward));
 
-        PaperaBInstance.transform.localRotation = transform.rotation;
+        PaperaBInstance.transform.localRotation = transform.rotation * Quaternion.Euler(rotOffset);
     }
 
     void SpawnaPaperaMalus()
