@@ -20,6 +20,7 @@ public class Duck : MonoBehaviour
 
     public void Awake()
     {
+        levelManager = FindObjectOfType<LevelManager>();
         anim = GetComponent<Animator>();
         mirino = FindObjectOfType<Mirino>();
         head = GetComponentInChildren<DuckHead>();
@@ -34,8 +35,8 @@ public class Duck : MonoBehaviour
         {
            
             anim.SetTrigger("Morta");
-            this.gameObject.GetComponent<Collider>().isTrigger=true;
-            head.GetComponent<Collider>().isTrigger = true;
+            Destroy(this.gameObject.GetComponent<Collider>());
+            Destroy(head.GetComponent<Collider>());
 
 
             if (tipo == TIPI_DI_PAPERE.RIGHT_DUCK)

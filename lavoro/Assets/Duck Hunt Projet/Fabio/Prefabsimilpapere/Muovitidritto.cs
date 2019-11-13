@@ -6,6 +6,7 @@ public class Muovitidritto : MonoBehaviour
 {
 
     public float velocita = 5;
+    public float velocitaCaduta = 5;
     public Vector3 rOffset;
 
     private void Update()
@@ -20,14 +21,14 @@ public class Muovitidritto : MonoBehaviour
             transform.localPosition += transform.forward * velocita * Time.deltaTime;
 
         }
-        else 
+        else
         {
 
-            transform.localRotation = Quaternion.Euler(rOffset);
-            transform.localPosition += transform.forward * velocita * Time.deltaTime;
+            this.transform.LookAt(transform.position, -transform.up);
+            this.transform.eulerAngles = rOffset;
+            transform.localPosition += new Vector3(0, -1 * velocitaCaduta * Time.deltaTime, 0);
 
         }
-        
-
     }
+        
 }

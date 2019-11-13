@@ -15,13 +15,14 @@ public class Mirino : MonoBehaviour
     public int maxDistance = 5;
     public static int score = 0;
     
-    private int bullets = 60;
+    public int bullets = 60;
  
     
     
 
     private void Awake()
     {
+
         cam = Camera.main;
     }
 
@@ -87,7 +88,7 @@ public class Mirino : MonoBehaviour
         {
             score -= scorePerDuck;
         }
-        else
+        else if (duck.tipo == Duck.TIPI_DI_PAPERE.BONUS_DUCK)
         {
             bullets += Mathf.RoundToInt(ammoPerDuck * pointsMultiplier);
         }
