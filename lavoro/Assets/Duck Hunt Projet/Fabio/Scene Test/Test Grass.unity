@@ -198,12 +198,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PapereBonus:
-  - {fileID: 898985876882260795, guid: 71b88adba46d55c438df6e2c659f9935, type: 3}
+  - {fileID: 898985876882260795, guid: 9bf612cf59cc7a444ac4805c6cbd11ad, type: 3}
+  PapereNormali: []
   PapereMalus: []
   rangeMin: -40
   rangeMax: 40
-  direction: {x: 0, y: 0, z: 0}
-  rotOffset: {x: -60, y: 0, z: 0}
+  distanzaDalloSpawn: 5
 --- !u!4 &341476494
 Transform:
   m_ObjectHideFlags: 0
