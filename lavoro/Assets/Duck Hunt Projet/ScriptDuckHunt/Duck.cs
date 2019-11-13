@@ -9,6 +9,8 @@ public class Duck : MonoBehaviour
     private DuckHead head;
     public LevelManager levelManager;
     public Mirino mirino;
+    public Animator anim;
+    public GameObject movimento;
 
     public enum TIPI_DI_PAPERE
     {
@@ -19,6 +21,7 @@ public class Duck : MonoBehaviour
 
     public void Awake()
     {
+        anim = GetComponent<Animator>();
         mirino = FindObjectOfType<Mirino>();
         head = GetComponentInChildren<DuckHead>();
         head.owner = this;
@@ -26,10 +29,17 @@ public class Duck : MonoBehaviour
     public void Danneggia(int damage)
     {
         vita -= damage;
-        if (vita <= 0)
+        anim.SetTrigger("presa");
+
+        if (vita <= 0)           
         {
-            gameObject.SetActive(false);
-            if(tipo == TIPI_DI_PAPERE.RIGHT_DUCK)
+           
+            anim.SetTrigger("morta");
+            this.gameObject.GetComponent<Collider>().isTrigger=true;
+            head.GetComponent<Collider>().isTrigger = true;
+
+
+            if (tipo == TIPI_DI_PAPERE.RIGHT_DUCK)
             {
                 mirino.numeroPapere -= 1;
                 levelManager.DuckCheck();
